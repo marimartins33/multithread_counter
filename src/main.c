@@ -16,6 +16,7 @@ unsigned long long int entrada[100];
 /*cria a trava*/ 
 pthread_mutex_t trava;
 
+/*função que calcula se o número é primo*/
 void calculo_primo(unsigned long long int primos){
  
  
@@ -36,6 +37,7 @@ void calculo_primo(unsigned long long int primos){
 	
 }
 
+/*função thread*/
 void* funcao_thread(void *arg) {
   int *N = (int*)(arg);
   pthread_mutex_lock(&trava);
@@ -54,9 +56,7 @@ void* funcao_thread(void *arg) {
 void ler_vetor (void){
  
   char fim;
-  
-  /* Aloca memoria para o vetor entrada*/
-      	
+    	
 
   do {
       scanf("%llu%c", &entrada[i], &fim);
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
   /*lê o vetor de entrada*/
   ler_vetor();
   
-  /*cria variável auxiliar para percorrer vetor entrada*/ 
+  /*atualiza variável auxiliar para percorrer vetor entrada*/ 
   l = i; 
        
   
@@ -87,12 +87,13 @@ int main(int argc, char **argv) {
    else{
      n =l;
    }
-      
+   
+    
    pthread_t threads[n];
    int thread_id[n];     
  
     
-     /* Identificadores de thread */
+  /* Identificadores de thread */
   for (int j=0; j<n; j++) {
     thread_id[j] = j;
   }
@@ -109,6 +110,7 @@ int main(int argc, char **argv) {
 
       
   }
+  
   /*informa quantidade de primos*/
   printf("%d\n", contador);
   return 0;
